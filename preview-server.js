@@ -1,4 +1,3 @@
-
 const express = require('express')
 const http = require('http')
 const WebSocket = require('ws')
@@ -17,7 +16,7 @@ app.get('/', (req, res) => {
 const server = http.createServer(app);
 
 //initialize the WebSocket server instance
-const wss = new WebSocket.Server({ server });
+const wss = new WebSocket.Server({server});
 wss.on('connection', (ws) => {
   ws.isAlive = true;
   ws.on('pong', () => {
@@ -30,19 +29,23 @@ wss.on('connection', (ws) => {
     wss.clients.forEach(client => {
       if (client != ws) {
         client.send(JSON.stringify({message, src: 'server'}));
-      }    
+      }
     });
   })
 
-  //send immediatly a feedback to the incoming connection    
+  //send immediatly a feedback to the incoming connection
   // ws.send('Hi there, I am a WebSocket server');
 })
 
 setInterval(() => {
   wss.clients.forEach(ws => {
     if (!ws.isAlive) return ws.terminate();
-    ws.isAlive = false;
-    ws.ping(null, false, true);
+    try {
+      ws.isAlive = false;
+      ws.ping(null, false, true);
+    } catch (err) {
+      console.log(err)
+    }
   })
 }, 10000);
 

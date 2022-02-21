@@ -25,9 +25,9 @@ figma.ui.onmessage = async (msg) => {
     await figma.loadFontAsync(<FontName>newTextNode.fontName);
     newTextNode.characters = msg.text
     newTextNode.name = 'Sample Text'
-   
+
     figma.currentPage.appendChild(newTextNode);
-     
+
 
     figma.currentPage.selection = [newTextNode];
   }
@@ -38,5 +38,16 @@ figma.ui.onmessage = async (msg) => {
     getSelectedNodes()
   }
 };
+
+
+const getStoreToken =( async ()=>{
+  const poToken = await figma.clientStorage.getAsync('poToken');
+  console.log(poToken)
+ if(poToken){
+   return poToken;
+ }
+ return ''
+})();
+
 
 figma.on("selectionchange", () => getSelectedNodes());

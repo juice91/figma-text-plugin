@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import TextItem from './TextItem'
+import PoEditor from './Token/index'
 
 declare function require(path: string): any
 
@@ -7,6 +8,7 @@ function App() {
   const [selectedTextNodes, setSelectedTextNodes] = useState<any[]>([])
 
   const onMessage = (msg) => {
+    console.log(msg);
     if (msg.data.pluginMessage &&  msg.data.pluginMessage.event === 'selected-text-nodes') {
       setSelectedTextNodes(msg.data.pluginMessage.nodes)
     }
@@ -26,12 +28,15 @@ function App() {
       <img src={require('./logo.svg')} />
       <h2>Update Text App</h2>
     </div>
-    
+
+    <div>
+      <PoEditor/>
+    </div>
     <div>
       {selectedTextNodes.length === 0 && <div className="select-warning">Select some text in Figma that you wish to edit.</div>}
       <div className="textList">
       {selectedTextNodes.map((node, index) => (
-        <TextItem 
+        <TextItem
           key={index}
           node={node}
           handleUpdateText={handleUpdateText}
