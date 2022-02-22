@@ -12,9 +12,15 @@
     "preview:browser": "node preview-server.js & webpack-dev-server --mode=development --PREVIEW_ENV=browser"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.8.5",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@figma/plugin-typings": "^1.19.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "figma-plugin-ds": "^1.0.1",
+    "formik": "^2.2.9",
+    "framer-motion": "^6",
     "postcss": "^8.2.10",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

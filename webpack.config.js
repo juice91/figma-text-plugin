@@ -32,8 +32,13 @@ module.exports = (env, argv) => ({
     rules: [
       // Converts TypeScript code to JavaScript
        // Converts TypeScript code to JavaScript
-      { 
-        test: /\.tsx?$/, 
+      {
+        type: 'javascript/auto',
+        test: /\.mjs$/,
+        use: []
+      },
+      {
+        test: /\.tsx?$/,
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/,
         use: [
